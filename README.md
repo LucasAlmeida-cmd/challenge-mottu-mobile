@@ -62,4 +62,7 @@ Onde terá informações sobre o admin como por exemplo o nome e a função.
 
 
 ## Link Figma: 
+A navegação não está funcional pois não conseguimos implementar pela falta de tempo, mas o senhor disse que não ia cobrar.
 https://www.figma.com/design/eCgS0WKfb2uH6ijMKgHO59/MotoFindr?node-id=13-3&t=kmdQQDYZvQpLoS5V-1
+
+
