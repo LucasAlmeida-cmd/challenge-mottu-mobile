@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 
-import { ScrollView, ViewStyle, TextStyle } from 'react-native';
+import { ScrollView, ViewStyle, TextStyle, Alert } from 'react-native';
 import { Button, ListItem, Text } from 'react-native-elements';
 import { useAuth } from '../../contexts/AuthContext';
 import { useNavigation } from '@react-navigation/native';
@@ -8,7 +8,7 @@ import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { useFocusEffect } from '@react-navigation/native';
 import { RootStackParamList } from '../../types/navigation';
 import Header from '../../components/Header';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+
 import {
     styles,
     Container,
@@ -19,126 +19,110 @@ import {
     ButtonContainer
 } from "../UserManagementScreen/style"
 
+import { useApi } from '../../hooks/useApi';
+import { patioService } from '../../services/patioService';
+
 type UserManagementScreenProps = {
-  navigation: NativeStackNavigationProp<RootStackParamList, 'UserManagement'>;
+    navigation: NativeStackNavigationProp<RootStackParamList, 'UserManagement'>;
 };
 
 interface Patio {
-  id: string;
-  identificacao: string;
-  largura: string;
-  comprimento: string;
+    idPatio: string;
+    identificacao: string;
+    largura: number;
+    comprimento: number
 }
 
-interface StyledProps {
-  role: string;
-}
+
 
 const UserManagementScreen: React.FC = () => {
-  const { user } = useAuth();
-  const navigation = useNavigation<UserManagementScreenProps['navigation']>();
-  const [patios, setPatios] = useState<Patio[]>([]);
-  const [loading, setLoading] = useState(true);
+    const { data: patios, loading, error, execute: refreshPatios } = useApi<Patio[]>(patioService.getPatios);
+    const navigation = useNavigation<UserManagementScreenProps['navigation']>();
 
-  const loadPatios = async () => {
+    const handleDeletePatio = async (identificacao: string) => {
+        console.log("entrou")
     try {
-      const storedPatios = await AsyncStorage.getItem('@MotoFindr:patios');
-      if (storedPatios) {
-        const allPatios: Patio[] = JSON.parse(storedPatios);
-        const filteredPatios = allPatios;
-        setPatios(filteredPatios);
-      }
+      await patioService.deletePatio(identificacao.trim());
+      refreshPatios();
     } catch (error) {
-      console.error('Erro ao carregar usuários:', error);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const handleDeletePatio = async (patioId: string) => {
-    try {
-      const storedUsers = await AsyncStorage.getItem('@MotoFindr:patios');
-      if (storedUsers) {
-        const allPatios: Patio[] = JSON.parse(storedUsers);
-        const updatedPatios = allPatios.filter(u => u.id !== patioId);
-        await AsyncStorage.setItem('@MotoFindr:patios', JSON.stringify(updatedPatios));
-        loadPatios(); // Recarrega a lista
-      }
-    } catch (error) {
-      console.error('Erro ao deletar usuário:', error);
+      console.error('Erro ao deletar pátio:', error);
     }
   };
 
 
-  useFocusEffect(
-    React.useCallback(() => {
-      loadPatios();
-    }, [])
-  );
+    useFocusEffect(
+        useCallback(() => {
+            refreshPatios();
+        }, [])
+    );
 
-  return (
-    <Container>
-      <Header />
-      <ScrollView contentContainerStyle={styles.scrollContent}>
+    return (
+        <Container>
+            <Header />
+            <ScrollView contentContainerStyle={styles.scrollContent}>
 
-        <Button
-          title="Inserir Pátio"
-          onPress={() => navigation.navigate('RegisterPatio')}
-          containerStyle={styles.button as ViewStyle}
-          buttonStyle={styles.buttonStyle}
-          titleStyle={styles.inputTextEnviar}
-        />
+                <Button
+                    title="Inserir Pátio"
+                    onPress={() => navigation.navigate('RegisterPatio')}
+                    containerStyle={styles.button as ViewStyle}
+                    buttonStyle={styles.buttonStyle}
+                    titleStyle={styles.inputTextEnviar}
+                />
 
-        <Title>Pátios Cadastrados</Title>
+                <Title>Pátios Cadastrados</Title>
+                {loading ? (
+                    <LoadingText>Carregando Pátios...</LoadingText>
+                ) : !patios || patios.length === 0 ? (
+                    <EmptyText>Nenhum pátio cadastrado</EmptyText>
+                ) : (
 
-        {loading ? (
-          <LoadingText>Carregando Pátios...</LoadingText>
-        ) : patios.length === 0 ? (
-          <EmptyText>Nenhum pátio cadastrado</EmptyText>
-        ) : (
-          patios.map((patio) => (
+                    patios.map((patio) => (
+                        <UserCard key={patio.idPatio}
+                            bottomDivider
+                            containerStyle={{ backgroundColor: '#404040' }}>
+                            <ListItem.Content>
 
-            <UserCard key={patio.id} 
-            bottomDivider
-            containerStyle={{ backgroundColor: '#404040'}}>
-              <ListItem.Content>
-                <ListItem.Title style={styles.patioIdentificacao as TextStyle}>
-                  {patio.identificacao}
-                </ListItem.Title>
+                                <ListItem.Title style={styles.patioIdentificacao as TextStyle}>
+                                    Identificação: {patio.identificacao}
+                                </ListItem.Title>
 
-                <ListItem.Subtitle style={styles.patioLargura as TextStyle}>
-                  Largura: {patio.largura}
-                </ListItem.Subtitle>
+                                <ListItem.Subtitle style={styles.patioLargura as TextStyle}>
+                                    Largura: {patio.largura}m
+                                </ListItem.Subtitle>
 
-                <ListItem.Subtitle style={styles.patioLargura as TextStyle}>
-                  Comprimento: {patio.comprimento}
-                </ListItem.Subtitle>
+                                <ListItem.Subtitle style={styles.patioLargura as TextStyle}>
+                                    Comprimento: {patio.comprimento}m
+                                </ListItem.Subtitle>
 
-                <ButtonContainer>
-                  <Button
-                    title="Apagar"
-                    onPress={() => handleDeletePatio(patio.identificacao)}
-                    containerStyle={{ width: 'auto' }}
-                    buttonStyle={styles.deleteButton}
-                    titleStyle={styles.deleteButtonText}
-                  />
-                </ButtonContainer>
-              </ListItem.Content>
-            </UserCard>
+                                <ListItem.Subtitle style={styles.patioLargura as TextStyle}>
+                                    Área Total: {(patio.largura * patio.comprimento).toFixed(2)}m²
+                                </ListItem.Subtitle>
 
-          ))
-        )}
 
-        <Button
-          title="Voltar"
-          onPress={() => navigation.navigate('AdminDashboard')}
-          containerStyle={styles.button as ViewStyle}
-          buttonStyle={styles.buttonStyleVoltar}
-          titleStyle={styles.inputTextVoltar}
-        />
-      </ScrollView>
-    </Container>
-  );
+                                <ButtonContainer>
+                                    <Button
+                                        title="Apagar"
+                                        onPress={() => handleDeletePatio(patio.identificacao)}
+                                        containerStyle={{ width: 'auto' }}
+                                        buttonStyle={styles.deleteButton}
+                                        titleStyle={styles.deleteButtonText}
+                                    />
+                                </ButtonContainer>
+                            </ListItem.Content>
+                        </UserCard>
+                    ))
+                )}
+
+                <Button
+                    title="Voltar"
+                    onPress={() => navigation.navigate('AdminDashboard')}
+                    containerStyle={styles.button as ViewStyle}
+                    buttonStyle={styles.buttonStyleVoltar}
+                    titleStyle={styles.inputTextVoltar}
+                />
+            </ScrollView>
+        </Container>
+    );
 };
 
 

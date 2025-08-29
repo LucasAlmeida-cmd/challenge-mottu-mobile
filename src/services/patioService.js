@@ -1,9 +1,8 @@
-// src/services/userService.js
-import api from '../../../services/api';
+import api from './api';
 
-export const userService = {
-  // GET - Buscar todos os usuários
-  async getUsers() {
+export const patioService = {
+
+  async getPatios() {
     try {
       const response = await api.get('/patio');
       return response.data;
@@ -22,15 +21,16 @@ export const userService = {
     }
   },
 
-//   // POST - Criar novo usuário
-//   async createUser(userData) {
-//     try {
-//       const response = await api.post('/users', userData);
-//       return response.data;
-//     } catch (error) {
-//       throw new Error('Erro ao criar usuário: ' + error.message);
-//     }
-//   },
+async createPatio(patioData) {
+  try {
+    const response = await api.post('/patio', patioData);
+    return response.data;
+  } catch (error) {
+    throw new Error('Erro ao criar pátio: ' + error.message);
+  }
+},
+
+
 
 //   // PUT - Atualizar usuário
 //   async updateUser(id, userData) {
@@ -42,13 +42,14 @@ export const userService = {
 //     }
 //   },
 
-  // DELETE - Remover usuário
-  async deleteUser(id) {
+
+  async deletePatio(identificacao) {
     try {
+      console.log(identificacao);
       const response = await api.delete(`/patio/${identificacao}`);
       return response.data;
     } catch (error) {
-      throw new Error('Erro ao deletar usuário: ' + error.message);
+      throw new Error('Erro ao deletar pátio: ' + error.message);
     }
   }
 };
