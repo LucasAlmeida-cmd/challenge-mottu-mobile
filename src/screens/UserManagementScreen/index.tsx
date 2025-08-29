@@ -1,15 +1,23 @@
 import React, { useState } from 'react';
-import styled from 'styled-components/native';
+
 import { ScrollView, ViewStyle, TextStyle } from 'react-native';
 import { Button, ListItem, Text } from 'react-native-elements';
-import { useAuth } from '../contexts/AuthContext';
+import { useAuth } from '../../contexts/AuthContext';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { useFocusEffect } from '@react-navigation/native';
-import { RootStackParamList } from '../types/navigation';
-import theme from '../styles/theme';
-import Header from '../components/Header';
+import { RootStackParamList } from '../../types/navigation';
+import Header from '../../components/Header';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import {
+    styles,
+    Container,
+    Title,
+    UserCard,
+    LoadingText,
+    EmptyText,
+    ButtonContainer
+} from "../UserManagementScreen/style"
 
 type UserManagementScreenProps = {
   navigation: NativeStackNavigationProp<RootStackParamList, 'UserManagement'>;
@@ -109,7 +117,7 @@ const UserManagementScreen: React.FC = () => {
                 <ButtonContainer>
                   <Button
                     title="Apagar"
-                    onPress={() => handleDeletePatio(patio.id)}
+                    onPress={() => handleDeletePatio(patio.identificacao)}
                     containerStyle={{ width: 'auto' }}
                     buttonStyle={styles.deleteButton}
                     titleStyle={styles.deleteButtonText}
@@ -133,118 +141,5 @@ const UserManagementScreen: React.FC = () => {
   );
 };
 
-const styles = {
-  scrollContent: {
-    padding: 20,
-  },
-  button: {
-    marginBottom: 20,
-    width: '100%',
-  },
-  buttonStyle: {
-    backgroundColor: theme.colors.verde,
-    paddingVertical: 10,
-    height: 50,
-    borderRadius: 10,
-  },
-  buttonStyleVoltar: {
-    backgroundColor: 'transparent',
-    paddingVertical: 10,
-    height: 50,
-    borderRadius: 10,
-    borderWidth: 1,
-    borderColor: '#929292',
-  },
-  inputTextVoltar: {
-    fontFamily: 'KdamThmorPro',
-    color: '#929292',
-  },
-  inputTextEnviar: {
-    fontFamily: 'KdamThmorPro',
-    color: '#282828',
-  },
-  backButton: {
-    backgroundColor: theme.colors.secondary,
-    paddingVertical: 12,
-  },
-  actionButton: {
-    marginTop: 8,
-    width: '48%',
-  },
-  editButton: {
-    backgroundColor: theme.colors.primary,
-    paddingVertical: 8,
-  },
-  deleteButton: {
-    backgroundColor: 'red',
-    paddingHorizontal: 16,
-    paddingVertical: 6,
-    borderRadius: 6,
-  },
-  deleteButtonText: {
-    fontFamily: 'KdamThmorPro',
-    color: '#000000',
-    fontSize: 16,
-  },
-  patioIdentificacao: {
-    fontSize: 18,
-    fontFamily: 'KdamThmorPro',
-    fontWeight: 'bold',
-    color: '#fff',
-    marginBottom: 8,
-  },
-  patioLargura: {
-    fontSize: 16,
-    color: '#ffffff',
-    fontFamily: 'KdamThmorPro',
-    marginBottom: 4,
-  },
-
-  
-};
-
-const Container = styled.View`
-  flex: 1;
-  background-color: ${theme.colors.fundoPadrao};
-`;
-
-const Title = styled.Text`
-  font-size: 24px;
-  font-weight: bold;
-  font-family: 'KdamThmorPro';
-  color: ${theme.colors.verde};
-  margin-bottom: 20px;
-  text-align: center;
-`;
-
-const UserCard = styled(ListItem)`
-  background-color: #404040;
-  border-radius: 10px;
-  border-color: #929292;
-  margin-bottom: 10px;
-  padding: 15px;
-  border-width: 1px;
-`;
-
-const LoadingText = styled.Text`
-  text-align: center;
-  color: ${theme.colors.text};
-  font-size: 16px;
-  margin-top: 20px;
-`;
-
-const EmptyText = styled.Text`
-  text-align: center;
-  color: ${theme.colors.text};
-  font-size: 16px;
-  margin-top: 20px;
-`;
-
-
-const ButtonContainer = styled.View`
-  flex-direction: row;
-  justify-content: space-between;
-  margin-top: 8px;
-`;
 
 export default UserManagementScreen; 
