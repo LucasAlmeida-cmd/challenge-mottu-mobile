@@ -10,6 +10,7 @@ import ProfileScreen from '../screens/ProfileScreen';
 import AdminDashboardScreen from '../screens/AdminDashboardScreen';
 import UserManagementScreen from '../screens/UserManagementScreen';
 import RegisterScreen from '../screens/RegisterScreenPatio';
+import EditPatioScreen from '../screens/EditPatioScreen'
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
@@ -46,9 +47,13 @@ export const AppNavigator: React.FC = () => {
                   options={{ title: 'Gerenciamento de Pátios' }}
                 />
 
-                <Stack.Screen 
-                  name="RegisterPatio" 
-                  component={RegisterScreen} 
+                <Stack.Screen
+                  name="RegisterPatio"
+                  component={RegisterScreen}
+                />
+                <Stack.Screen
+                  name="EditPatio"
+                  component={EditPatioScreen}
                 />
               </>
             )}

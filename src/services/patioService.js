@@ -21,26 +21,26 @@ export const patioService = {
     }
   },
 
-async createPatio(patioData) {
-  try {
-    const response = await api.post('/patio', patioData);
-    return response.data;
-  } catch (error) {
-    throw new Error('Erro ao criar pátio: ' + error.message);
-  }
-},
+  async createPatio(patioData) {
+    try {
+      const response = await api.post('/patio', patioData);
+      return response.data;
+    } catch (error) {
+      throw new Error('Erro ao criar pátio: ' + error.message);
+    }
+  },
 
 
 
-//   // PUT - Atualizar usuário
-//   async updateUser(id, userData) {
-//     try {
-//       const response = await api.put(`/users/${id}`, userData);
-//       return response.data;
-//     } catch (error) {
-//       throw new Error('Erro ao atualizar usuário: ' + error.message);
-//     }
-//   },
+  //   // PUT - Atualizar usuário
+  async updatePatio(identificacao, patioData) {
+    try {
+      const response = await api.put(`/patio/${identificacao}`, patioData);
+      return response.data;
+    } catch (error) {
+      throw new Error('Erro ao atualizar pátio: ' + error.message);
+    }
+  },
 
 
   async deletePatio(identificacao) {

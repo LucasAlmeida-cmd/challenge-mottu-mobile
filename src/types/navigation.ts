@@ -11,6 +11,7 @@
  * @property Profile - Tela de perfil do usuário
  * @property AdminDashboard - Tela do painel de administração
  * @property UserManagement - Tela de gerenciamento de usuários
+ * @property EditPatio
  */
 export type RootStackParamList = {
   Login: undefined;
@@ -19,4 +20,10 @@ export type RootStackParamList = {
   Profile: undefined;
   AdminDashboard: undefined;
   UserManagement: undefined;
+  EditPatio: {
+    idPatio: string;
+    identificacao: string;
+    largura: number;
+    comprimento: number;
+  };
 };
