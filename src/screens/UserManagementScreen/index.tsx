@@ -41,13 +41,13 @@ const UserManagementScreen: React.FC = () => {
 
     const handleDeletePatio = async (identificacao: string) => {
         console.log("entrou")
-    try {
-      await patioService.deletePatio(identificacao.trim());
-      refreshPatios();
-    } catch (error) {
-      console.error('Erro ao deletar pátio:', error);
-    }
-  };
+        try {
+            await patioService.deletePatio(identificacao.trim());
+            refreshPatios();
+        } catch (error) {
+            console.error('Erro ao deletar pátio:', error);
+        }
+    };
 
 
     useFocusEffect(
@@ -108,6 +108,18 @@ const UserManagementScreen: React.FC = () => {
                                         titleStyle={styles.deleteButtonText}
                                     />
                                 </ButtonContainer>
+
+                                <Button
+                                    title="Atualizar"
+                                    onPress={() => {
+                                        navigation.navigate('EditPatio', {
+                                            idPatio: patio.idPatio,
+                                            identificacao: patio.identificacao,
+                                            largura: patio.largura,
+                                            comprimento: patio.comprimento,
+                                        });
+                                    }}
+                                />
                             </ListItem.Content>
                         </UserCard>
                     ))
