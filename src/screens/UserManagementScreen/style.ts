@@ -68,6 +68,51 @@ export const styles = {
     fontFamily: 'KdamThmorPro',
     marginBottom: 4,
   },
+  loadingContainer: {
+        alignItems: 'center',
+        justifyContent: 'center',
+        padding: 20
+    },
+    errorContainer: {
+        alignItems: 'center',
+        justifyContent: 'center',
+        padding: 20
+    },
+    errorText: {
+        color: '#ff6b6b',
+        marginVertical: 10,
+        textAlign: 'center'
+    },
+    retryButton: {
+        backgroundColor: '#ff6b6b',
+        paddingVertical: 10,
+        borderRadius: 8
+    },
+    retryButtonText: {
+        fontSize: 14
+    },
+    emptyContainer: {
+        alignItems: 'center',
+        justifyContent: 'center',
+        padding: 40
+    },
+    patioCard: {
+        backgroundColor: '#404040',
+        borderRadius: 10,
+        marginBottom: 15,
+        padding: 15
+    },
+    patioDetail: {
+        color: '#cccccc',
+        marginBottom: 5
+    },
+    updateButton: {
+        backgroundColor: '#4CAF50',
+        paddingVertical: 8
+    },
+    updateButtonText: {
+        fontSize: 14
+    }
 
   
 };

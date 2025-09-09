@@ -35,9 +35,21 @@ const LoginScreen: React.FC = () => {
   };
 
   const handleLoginGoogle = async () => {
+    setLoading(true);
+    // Simulação de login com Google
+    setTimeout(() => {
+      setLoading(false);
+      setError('Login com Google ainda não implementado');
+    }, 1500);
   };
 
   const handleLoginGitHub = async () => {
+    setLoading(true);
+    // Simulação de login com GitHub
+    setTimeout(() => {
+      setLoading(false);
+      setError('Login com GitHub ainda não implementado');
+    }, 1500);
   };
 
 

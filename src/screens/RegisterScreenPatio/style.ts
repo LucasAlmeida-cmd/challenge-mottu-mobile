@@ -51,6 +51,73 @@ export const styles = {
     backgroundColor: theme.colors.secondary,
     paddingVertical: 12,
   },
+    inputError: {
+    borderColor: 'red',
+    borderWidth: 1
+  },
+  errorText: {
+    color: 'red',
+    fontSize: 12,
+    marginTop: 5
+  },
+  summaryContainer: {
+    marginBottom: 20,
+    padding: 10,
+    backgroundColor: '#f5f5f5',
+    borderRadius: 8
+  },
+  summaryText: {
+    textAlign: 'center',
+    fontSize: 16,
+    fontWeight: 'bold',
+    color: '#333'
+  },
+  buttonDisabled: {
+    backgroundColor: '#cccccc'
+  },
+  modalOverlay: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'rgba(0, 0, 0, 0.5)'
+  },
+  modalContainer: {
+    width: '80%',
+    backgroundColor: 'white',
+    borderRadius: 15,
+    padding: 25,
+    alignItems: 'center',
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5
+  },
+  modalTitle: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    marginTop: 10,
+    marginBottom: 5
+  },
+  modalMessage: {
+    fontSize: 16,
+    textAlign: 'center',
+    marginBottom: 20,
+    color: '#555'
+  },
+  modalButton: {
+    backgroundColor: '#4CAF50',
+    paddingHorizontal: 20,
+    paddingVertical: 10,
+    borderRadius: 8
+  },
+  modalButtonText: {
+    color: 'white',
+    fontWeight: 'bold'
+  }
 };
 
 export const Container = styled.View`
