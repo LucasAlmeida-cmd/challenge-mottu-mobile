@@ -1,14 +1,12 @@
 import React, { useState } from 'react';
-import styled from 'styled-components/native';
 import { Input, Button, Text } from 'react-native-elements';
-import { useAuth } from '../contexts/AuthContext';
-import theme from '../styles/theme';
+import { useAuth } from '../../contexts/AuthContext';
 import { ViewStyle } from 'react-native';
 import { View } from 'react-native';
 import { Link, useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { RootStackParamList } from '../types/navigation';
-import { color } from 'react-native-elements/dist/helpers';
+import { RootStackParamList } from '../../types/navigation';
+import {styles, Container, Title, ErrorText } from './styles';
 
 type LoginScreenProps = {
   navigation: NativeStackNavigationProp<RootStackParamList, 'Login'>;
@@ -45,7 +43,6 @@ const LoginScreen: React.FC = () => {
 
   const handleLoginGitHub = async () => {
     setLoading(true);
-    // Simulação de login com GitHub
     setTimeout(() => {
       setLoading(false);
       setError('Login com GitHub ainda não implementado');
@@ -150,99 +147,6 @@ const LoginScreen: React.FC = () => {
   );
 };
 
-const styles = {
-  input: {
-    marginBottom: 15,
-  },
-  inputContainer: {
-    borderWidth: 1,
-    borderColor: '#929292',
-    borderRadius: 10,
-    backgroundColor: theme.colors.fundoPadrao,
-  },
-  inputText: {
-    fontFamily: 'KdamThmorPro',
-    color: '#929292',
-    fontSize: 16,
-    paddingLeft: 10,
-  },
-  inputTextEnviar: {
-    fontFamily: 'KdamThmorPro',
-    color: '#282828',
-  },
-  inputTextEnviarLogin: {
-    fontFamily: 'KdamThmorPro',
-    color: '#929292',
-  },
 
-  button: {
-    marginTop: 10,
-    width: '95%',
-  },
-  buttonStyle: {
-    backgroundColor: theme.colors.verde,
-    paddingVertical: 10,
-    height: 50,
-    borderRadius: 10,
-  },
-  buttonStyleLogin:{
-    backgroundColor: 'transparent',
-    paddingVertical: 10,
-    height: 50,
-    borderRadius: 10,
-    borderWidth: 1,
-    borderColor: '#929292',
-  },
-  registerButton: {
-    marginTop: 10,
-    width: '100%',
-  },
-  registerButtonStyle: {
-    backgroundColor: theme.colors.secondary,
-    paddingVertical: 12,
-  },
-  pass: {
-    textAlign: 'left' as const,
-    color: theme.colors.verde,
-    fontSize: 14,
-    alignSelf: 'flex-start',
-    marginLeft: 10,
-    marginTop: 10,
-  },
-  hint: {
-    marginTop: 20,
-    textAlign: 'center' as const,
-    color: '#929292',
-  },
-  credentials: {
-    marginTop: 10,
-    textAlign: 'center' as const,
-    color: '#929292',
-    fontSize: 12,
-  },
-};
-
-const Container = styled.View`
-  flex: 1;
-  padding: 20px;
-  justify-content: center;
-  align-items: center;    
-  background-color: ${theme.colors.fundoPadrao};
-`;
-
-const Title = styled.Text`
-  font-size: 36px;
-  font-weight: bold;
-  text-align: center;
-  margin-bottom: 30px;
-  color: ${theme.colors.verde};
-  font-family: 'KdamThmorPro';
-`;
-
-const ErrorText = styled.Text`
-  color: ${theme.colors.error};
-  text-align: center;
-  margin-bottom: 10px;
-`;
 
 export default LoginScreen; 
