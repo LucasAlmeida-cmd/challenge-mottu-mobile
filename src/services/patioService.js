@@ -45,11 +45,16 @@ export const patioService = {
 
   async deletePatio(identificacao) {
     try {
-      console.log(identificacao);
+      console.log(identificacao)
       const response = await api.delete(`/patio/${identificacao}`);
-      return response.data;
+      if (response.status === 204) {
+        return { message: "Deletado com sucesso" };
+      }
     } catch (error) {
-      throw new Error('Erro ao deletar pátio: ' + error.message);
+      throw new Error("Erro ao deletar pátio: " + error.message);
     }
   }
+
+
+
 };
