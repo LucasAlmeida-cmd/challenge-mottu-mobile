@@ -7,10 +7,12 @@
     "userInterfaceStyle": "light",
     "newArchEnabled": true,
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "newArchEnabled": false
     },
     "android": {
-      "package": "com.lucascmd.challenge"
+      "package": "com.lucascmd.challenge",
+      "newArchEnabled": false
     },
     "plugins": [
       "expo-font"
