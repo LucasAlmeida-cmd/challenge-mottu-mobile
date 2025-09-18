@@ -1,4 +1,4 @@
-package com.challengemottu
+package com.lucascmd.challenge
 
 import android.app.Application
 import android.content.res.Configuration

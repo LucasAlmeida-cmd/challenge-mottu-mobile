@@ -1,4 +1,4 @@
-package com.challengemottu
+package com.lucascmd.challenge
 
 import android.os.Build
 import android.os.Bundle
