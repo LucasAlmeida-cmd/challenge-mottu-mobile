@@ -21,6 +21,13 @@
       "eas": {
         "projectId": "014ca88d-3f94-4137-9c23-a3d0396c7cab"
       }
+    },
+    "owner": "lucas-cmd",
+    "runtimeVersion": {
+      "policy": "appVersion"
+    },
+    "updates": {
+      "url": "https://u.expo.dev/014ca88d-3f94-4137-9c23-a3d0396c7cab"
     }
   }
 }
