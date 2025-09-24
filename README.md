@@ -67,6 +67,9 @@ https://www.figma.com/design/eCgS0WKfb2uH6ijMKgHO59/MotoFindr?node-id=13-3&t=kmd
 
 ## Link Expo:
 
+<img width="323" height="317" alt="image" src="https://github.com/user-attachments/assets/eb6819b4-1143-474a-a70f-ae1d0e9c1b25" />
+
+
  https://expo.dev/preview/update?message=Atualiza%C3%A7%C3%A3o+OTA&updateRuntimeVersion=1.0.0&createdAt=2025-09-24T00%3A52%3A44.818Z&slug=exp&projectId=014ca88d-3f94-4137-9c23-a3d0396c7cab&group=260753db-0e79-4494-8e26-e9c83f3b2f00
 
 
