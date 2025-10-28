@@ -74,3 +74,10 @@ https://www.figma.com/design/eCgS0WKfb2uH6ijMKgHO59/MotoFindr?node-id=13-3&t=kmd
 
 
 exp+://expo-development-client/?url=https://u.expo.dev/014ca88d-3f94-4137-9c23-a3d0396c7cab/group/260753db-0e79-4494-8e26-e9c83f3b2f00
+
+
+## Hash do commit final:
+
+```
+  eda87ef50ec74e6833b176cbac38e20a3248e636
+```
